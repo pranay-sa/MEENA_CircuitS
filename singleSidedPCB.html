@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Sided PCB Manufacturing</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #e0e0e0;
+            --white: #ffffff;
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #2c3e50;
+            --background-color: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Fixed the header width issue */
+        .headerContainer {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navigationContainerWrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        /* Added max-width container for main content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header1 {
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Rest of the styles remain the same */
+        .category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-link {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .category-link a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .product-image {
+            margin-bottom: 2rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .tab.active {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        p,
+        ul {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        .related-products {
+            margin-top: 4rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .read-more {
+            display: block;
+            padding: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /*FORM*/
+        .review-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #dddddd;
+            transition: color 0.2s ease;
+        }
+
+        .star.active {
+            color: #ffd700;
+        }
+
+        .submit-btn {
+            background-color: #8e44ad;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #73359a;
+        }
+
+        /*NAV*/
+        .primaryLogoIdentifier {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navigationLinksContainer {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navigationLinksContainer a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navigationLinksContainer a:hover {
+            color: var(--accent-color);
+        }
+
+        .navigationDropdownWrapper {
+            position: relative;
+        }
+
+        .dropdownContentContainer {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdownContentContainer a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdownContentContainer a:hover {
+            background-color: var(--background-color);
+        }
+
+        .navigationDropdownWrapper:hover>.dropdownContentContainer {
+            display: block;
+        }
+
+        .nestedDropdownWrapper {
+            position: relative;
+        }
+
+        .nestedDropdownContentContainer {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .nestedDropdownWrapper:hover>.nestedDropdownContentContainer {
+            display: block;
+        }
+
+        .callToActionButton {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .callToActionButton:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .mobileMenuToggleButton {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .navigationLinksContainer {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                overflow-y: auto;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navigationLinksContainer.active {
+                display: flex;
+            }
+
+            .navigationLinksContainer a {
+                padding: 0.8rem 0;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdownContentContainer,
+            .nestedDropdownContentContainer {
+                position: static;
+                box-shadow: none;
+                background-color: #f8f9fa;
+                padding-left: 1rem;
+                width: 100%;
+                margin: 0.5rem 0;
+                border-radius: 4px;
+            }
+
+            .navigationDropdownWrapper.active>.dropdownContentContainer,
+            .nestedDropdownWrapper.active>.nestedDropdownContentContainer {
+                display: block;
+            }
+
+            .mobileMenuToggleButton {
+                display: block;
+                z-index: 1001;
+            }
+        }
+        /*footer*/
+        footer {
+            background-color: #2c3e50;
+            color: var(--white);
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /*SOCIALS TOp*/
+        .header-bar {
+            background-color: #D3D3D3;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-info {
+            color: black;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .contact-info {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <div class="contact-info">
+            +91 99250-36831 | +91 96627-00932 | Sales@meenacircuits.co.in
+        </div>
+    </div>
+    <header class="headerContainer">
+        <nav class="navigationContainerWrapper">
+            <div class="primaryLogoIdentifier">Meena Circuits</div>
+            <div class="navigationLinksContainer">
+                <a href="index.html">Home</a>
+                <!--ADD LINKS HERE-->
+                <div class="navigationDropdownWrapper">
+                    <a href="#">Products</a>
+                    <div class="dropdownContentContainer">
+                        <a href="singleSidedPCB.html">Single Sided PCBs</a>
+                        <a href="#double-sided">Double Sided PCBs</a>
+                        <div class="nestedDropdownWrapper">
+                            <a href="#multilayer">Multilayer PCBs</a>
+                            <div class="nestedDropdownContentContainer">
+                                <a href="#4-layer">4 Layer PCBs</a>
+                                <a href="#6-layer">6 Layer PCBs</a>
+                                <a href="#8-layer">8 Layer PCBs</a>
+                            </div>
+                        </div>
+                        <a href="#metal-core">Metal Core PCBs</a>
+                    </div>
+                </div>
+                <a href="index.html">Industries</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#quote" class="callToActionButton">Call for Quote</a>
+            <button class="mobileMenuToggleButton">☰</button>
+        </nav>
+    </header>
+    <section class="header1">
+        <div class="category">PCB</div>
+        <h1>Single Sided PCB</h1>
+        <div class="category-link">Category: <a href="#">PCB</a></div>
+    </section>
+
+    <main>
+        <div class="product-image fade-in">
+            <img src="1.png" alt="Single Sided PCB" class="main-image">
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="description">Description</button>
+            <button class="tab" data-tab="reviews">Reviews(0)</button>
+        </div>
+
+        <div class="content-section description active" id="description">
+            <h2>What is Single Sided PCB?</h2>
+            <p class="slide-up">Single-sided Printed Circuit Boards (PCBs) consist of one layer of conductive material
+                on one side, with the other side being used to mount various electronic components. This PCB is used in
+                multiple consumer electronics, such as mobile phones, computers, and household appliances.
+
+                Single-sided PCBs have printed circuit boards made of a single layer of conducting material, such as
+                copper or aluminium. This single layer is etched with an electric circuit pattern to form the necessary
+                electrical connections between components.
+
+                They are lightweight, cost-effective and provide excellent electrical conductivity to ensure proper
+                transfer of signals throughout the circuit. With their easy assembly, they are often used in industries
+                ranging from automotive to aerospace and robotics. In short, single-sided Printed Circuit Boards are an
+                ideal solution for various electronic applications.</p>
+
+            <h2>Single Layer PCB Manufacturing process:</h2>
+            <p class="slide-up">The printed circuit board production process begins with cutting, where the board is cut
+                into its desired shape. This is followed by cleaning the edges of the board to remove any residue from
+                the cutting process.</p>
+            <p class="slide-up">The board is then drilled with holes and plated through holes (PTH) to create pathways
+                between the two sides of the board. A thin layer of copper is then added to the entire surface of the
+                board using panel plating. Photolithography prints a circuit pattern onto the copper layer, which is
+                transferred onto the board by etching away any unwanted material.
+
+                After inspection, the board is either plated with a layer of copper or tin to create a solderable
+                surface and then coated with a protective layer such as conformal coating or solder mask. The board is
+                then exposed to ultraviolet light and developed before being layered with a material known as prepreg
+                between the copper layers.</p>
+
+            <p class="slide-up">Screen printing is used to apply a solder mask over the exposed copper surfaces,
+                followed by dipping the
+                board into a hot air solder bath. A conformal coating is applied, and components are soldered onto the
+                board.
+
+                The board is then tested to ensure that all of its components are functioning correctly and inspected
+                one last time for accuracy and defects before being packed in an anti-static bag and shipped off.
+
+                As one of India’s leading single-sided PCB manufacturers, we use advanced high-quality materials and
+                processes to ensure the highest quality standard for our products. Our expertise in design and
+                fabrication and a wide range of production capabilities give us an edge over other single-sided PCB
+                manufacturers in India.</p>
+
+            <p class="slide-up">We can offer custom solutions that best meet your requirements, whether you are looking
+                for simple
+                single-sided PCBs or more complex designs. To stay competitive in today’s technical market, we strive to
+                deliver the best quality products at a reasonable price.
+
+                As part of our commitment to excellence, our team of experts is dedicated to providing superior customer
+                service and prompt delivery times. We have invested heavily in the latest technology to ensure that our
+                production lines run smoothly and efficiently. Our experienced engineers and technicians utilise
+                advanced design software to optimise PCB performance, ensuring superior quality and reliability.</p>
+
+            <h2>Benefits of Single-Sided PCB India:</h2>
+            <ul class="benefits-list slide-up">
+                <li><b>Low costs, especially for high-volume orders:</b>Single-sided PCBs are more cost-effective than
+                    other boards, making them the ideal choice for mass production and high-volume orders.</li>
+                <li><b>High reliability:</b>These PCBs are reliable when it comes to transmitting signals across the
+                    board. This makes it a good choice for applications such as small household appliances, which
+                    require a stable signal.</li>
+                <li><b>High flexibility:</b>These PCBs can be used in different types of applications, from automotive
+                    to aerospace and robotics. This gives them the ability to adapt easily to changing requirements</li>
+                <li><b>Low probabilities of manufacturing issues:</b>Since single-sided PCBs are relatively more
+                    straightforward than multilayer boards, they have fewer chances of having any manufacturing issues.
+                    This ensures that your product will be completed on time due to faults in the board’s design or
+                    construction.</li>
+                <li><b>Easy to manufacture:</b>Single-sided PCBs can be produced quickly and efficiently, making them an
+                    ideal choice for timely product delivery. This is especially beneficial for products that require
+                    fast turnaround times.</li>
+                <li><b>Suitable for simple designs:</b>It is ideal for simple designs, making them perfect for products
+                    with minimal functionality. This allows you to keep costs down without sacrificing quality.</li>
+                <li><b>Faster lead times:</b>These PCBs can be produced quickly, ensuring your product will reach the
+                    market faster. This is especially beneficial for products with tight deadlines or requiring rapid
+                    prototyping.</li>
+                <li><b>Highly customisable:</b>These PCBs are highly customisable, as they don’t require complex
+                    manufacturing processes and can be adapted to fit any design. This allows you to tailor your product
+                    to the specific requirements of your customers and differentiate it from competitors.</li>
+            </ul>
+
+            <h2>Applications of Single Layer PCB:</h2>
+            <ul class="applications-list slide-up">
+                <li>
+                    <b>Automotive:</b> Single-sided PCBs are used in automotive applications such as sensors
+                    and electronic control units.
+                </li>
+                <li>
+                    <b>Telecommunications:</b> These PCBs are used in telecommunications devices, such as
+                    modems and routers.
+                </li>
+                <li>
+                    <b>Industrial Electronics:</b> These boards are frequently found in industrial electronics
+                    applications, such as industrial automation systems.
+                </li>
+                <li>
+                    <b>Home Appliances:</b> It can be found in various home appliances, from microwaves to
+                    washing machines.
+                </li>
+                <li>
+                    <b>Medical Devices:</b> These PCBs are used in medical devices, such as pacemakers and
+                    infusion pumps.
+                </li>
+                <li>
+                    <b>Robotics:</b> Single-sided PCBs are frequently found in robotics applications, from
+                    autonomous vehicles to robotic arms.
+                </li>
+                <li>
+                    <b>Wearables:</b> These PCBs are also used in wearable devices like fitness trackers and
+                    smartwatches.
+                </li>
+                <li>
+                    <b>Aerospace:</b> It is used in aerospace applications, such as aircraft control systems
+                    and navigation equipment.
+                </li>
+                <li>
+                    <b>IoT Devices:</b> These boards can be found in various Internet of Things (IoT) devices,
+                    from smart home appliances to connected lighting systems.
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-section reviews" id="reviews">
+            <h2>Customer Reviews</h2>
+            <form class="review-form">
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="review">Your Review</label>
+                    <textarea id="review" name="review" required
+                        placeholder="Share your thoughts about the product..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Review</button>
+            </form>
+        </div>
+
+        <section class="related-products">
+            <h2>Related products</h2>
+            <div class="product-grid">
+                <div class="product-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1631887269766-e1f68d8e1c68?w=400&auto=format&fit=crop&q=80"
+                        alt="Multilayer PCB">
+                    <h3>Multilayer PCBs</h3>
+                    <a href="#" class="read-more">READ MORE →</a>
+                </div>
+                <div class="product-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1631887270431-cb41f58d0d8f?w=400&auto=format&fit=crop&q=80"
+                        alt="Single Sided PCB">
+                    <h3>Single Sided PCB</h3>
+                    <a href="#" class="read-more">READ MORE →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Meena Circuits Logo">
+                        <span>Meena Circuits</span>
+                    </div>
+                    <p>Leading PCB manufacturer in India since 2006.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Indian Office</h3>
+                    <p>Survey #99/1, Village Vadadala, Jarod-Savli Road, Tal:Savli,Vadodara</p>
+                    <p>Email: sales@meenacircuits.co.in</p>
+                    <p>Phone: +91 99250-36831</p>
+                </div>
+                <div class="footer-section">
+                    <h3>USA Office</h3>
+                    <p>Atlantic Overseas – INC 100 Duffy Avenue Suite 510 Hicksville New York 11801</p>
+                    <p>Email: info@atlanticoverseas.net</p>
+                    <p>Phone: +15167387288</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday – Saturday: 9:00 A.M to 5:30 P.M</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Meena Circuit</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        //nav
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.querySelector('.mobileMenuToggleButton');
+            const navContainer = document.querySelector('.navigationLinksContainer');
+            const dropdowns = document.querySelectorAll('.navigationDropdownWrapper, .nestedDropdownWrapper');
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navContainer.classList.toggle('active');
+                mobileMenuToggle.textContent = navContainer.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Handle dropdowns
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Close other dropdowns at the same level
+                        const siblings = [...dropdown.parentElement.children];
+                        siblings.forEach(sibling => {
+                            if (sibling !== dropdown && sibling.classList.contains('navigationDropdownWrapper')) {
+                                sibling.classList.remove('active');
+                            }
+                        });
+
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navContainer.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    navContainer.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navContainer.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+        });
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                tabs.forEach(t => t.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const targetSection = document.getElementById(tab.dataset.tab);
+                targetSection.classList.add('active');
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with slide-up class
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.slide-up');
+            elements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(el);
+            });
+        });
+        //reviews
+        const stars = document.querySelectorAll('.star');
+        let rating = 0;
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                rating = index + 1;
+                updateStars();
+            });
+
+            star.addEventListener('mouseover', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+
+            star.addEventListener('mouseout', () => {
+                updateStars();
+            });
+        });
+
+        function updateStars() {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Form submission
+        const form = document.querySelector('.review-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = {
+                rating: rating,
+                name: form.name.value,
+                email: form.email.value,
+                review: form.review.value
+            };
+            console.log('Form submitted:', formData);
+            form.reset();
+            rating = 0;
+            updateStars();
+            alert('Thank you for your review!');
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container1 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .map-container1 {
+            flex: 1;
+            min-height: 400px;
+        }
+
+        .map-container1 iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .form-container1 {
+            flex: 1;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                flex-direction: column;
+            }
+
+            .map-container1 {
+                min-height: 300px;
+                margin-bottom: -10rem;
+            }
+        }
+
+        /*Contact US Main Page*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --primary: #9333ea;
+            --secondary: #6b21a8;
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #2c3e50;
+            --background-color: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero-about {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2VzyQ3xLmRbbT1I0BUSPZ2M7NRBjbb.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(147, 51, 234, 0.7));
+            animation: gradientShift 10s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(147, 51, 234, 0.7));
+            }
+
+            100% {
+                background: linear-gradient(135deg, rgba(147, 51, 234, 0.7), rgba(0, 0, 0, 0.8));
+            }
+        }
+
+        .hero-about h1 {
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /*footer*/
+        footer {
+            background-color: #2c3e50;
+            color: var(--white);
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /*NAVBAR*/
+
+        .headerContainer {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navigationContainerWrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .primaryLogoIdentifier {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navigationLinksContainer {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navigationLinksContainer a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navigationLinksContainer a:hover {
+            color: var(--accent-color);
+        }
+
+        .navigationDropdownWrapper {
+            position: relative;
+        }
+
+        .dropdownContentContainer {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdownContentContainer a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdownContentContainer a:hover {
+            background-color: var(--background-color);
+        }
+
+        .navigationDropdownWrapper:hover>.dropdownContentContainer {
+            display: block;
+        }
+
+        .nestedDropdownWrapper {
+            position: relative;
+        }
+
+        .nestedDropdownContentContainer {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .nestedDropdownWrapper:hover>.nestedDropdownContentContainer {
+            display: block;
+        }
+
+        .callToActionButton {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .callToActionButton:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .mobileMenuToggleButton {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .navigationLinksContainer {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                overflow-y: auto;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navigationLinksContainer.active {
+                display: flex;
+            }
+
+            .navigationLinksContainer a {
+                padding: 0.8rem 0;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdownContentContainer,
+            .nestedDropdownContentContainer {
+                position: static;
+                box-shadow: none;
+                background-color: #f8f9fa;
+                padding-left: 1rem;
+                width: 100%;
+                margin: 0.5rem 0;
+                border-radius: 4px;
+            }
+
+            .navigationDropdownWrapper.active>.dropdownContentContainer,
+            .nestedDropdownWrapper.active>.nestedDropdownContentContainer {
+                display: block;
+            }
+
+            .mobileMenuToggleButton {
+                display: block;
+                z-index: 1001;
+            }
+        }
+        /*SOCIALS TOp*/
+        .header-bar {
+            background-color: #D3D3D3;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-info {
+            color: black;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .contact-info {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <div class="contact-info">
+            +91 99250-36831 | +91 96627-00932 | Sales@meenacircuits.co.in
+        </div>
+    </div>
+    <!-- HTML Structure -->
+    <header class="headerContainer">
+        <nav class="navigationContainerWrapper">
+            <div class="primaryLogoIdentifier">Meena Circuits</div>
+            <div class="navigationLinksContainer">
+                <a href="index.html">Home</a>
+                <!--ADD LINKS HERE-->
+                <div class="navigationDropdownWrapper">
+                    <a href="#">Products</a>
+                    <div class="dropdownContentContainer">
+                        <a href="singleSidedPCB.html">Single Sided PCBs</a>
+                        <a href="#double-sided">Double Sided PCBs</a>
+                        <div class="nestedDropdownWrapper">
+                            <a href="#multilayer">Multilayer PCBs</a>
+                            <div class="nestedDropdownContentContainer">
+                                <a href="#4-layer">4 Layer PCBs</a>
+                                <a href="#6-layer">6 Layer PCBs</a>
+                                <a href="#8-layer">8 Layer PCBs</a>
+                            </div>
+                        </div>
+                        <a href="#metal-core">Metal Core PCBs</a>
+                    </div>
+                </div>
+                <a href="index.html">Industries</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#quote" class="callToActionButton">Call for Quote</a>
+            <button class="mobileMenuToggleButton">☰</button>
+        </nav>
+    </header>
+    <section class="hero-about">
+        <h1>Contact Us</h1>
+    </section>
+    <div class="container1">
+        <div class="contact-section">
+            <div class="map-container1">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7367.163132103528!2d73.18674674065733!3d22.453391042899753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fcf209c348e97%3A0x5a4e338dbce12e2f!2sSama-Savli%20Rd%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sin!4v1698766527651!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="form-container1">
+                <form id="contactForm" onsubmit="return validateForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name">
+                        <div class="error" id="nameError">Please enter your name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <div class="error" id="messageError">Please enter your message</div>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Meena Circuits Logo">
+                        <span>Meena Circuits</span>
+                    </div>
+                    <p>Leading PCB manufacturer in India since 2006.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Indian Office</h3>
+                    <p>Survey #99/1, Village Vadadala, Jarod-Savli Road, Tal:Savli,Vadodara</p>
+                    <p>Email: sales@meenacircuits.co.in</p>
+                    <p>Phone: +91 99250-36831</p>
+                </div>
+                <div class="footer-section">
+                    <h3>USA Office</h3>
+                    <p>Atlantic Overseas – INC 100 Duffy Avenue Suite 510 Hicksville New York 11801</p>
+                    <p>Email: info@atlanticoverseas.net</p>
+                    <p>Phone: +15167387288</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday – Saturday: 9:00 A.M to 5:30 P.M</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Meena Circuit </p>
+            </div>
+        </div>
+    </footer>
+
+        <script>
+
+            //nav
+            document.addEventListener('DOMContentLoaded', function () {
+                const mobileMenuToggle = document.querySelector('.mobileMenuToggleButton');
+                const navContainer = document.querySelector('.navigationLinksContainer');
+                const dropdowns = document.querySelectorAll('.navigationDropdownWrapper, .nestedDropdownWrapper');
+
+                // Toggle mobile menu
+                mobileMenuToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navContainer.classList.toggle('active');
+                    mobileMenuToggle.textContent = navContainer.classList.contains('active') ? '✕' : '☰';
+                });
+
+                // Handle dropdowns
+                dropdowns.forEach(dropdown => {
+                    const link = dropdown.querySelector('a');
+                    link.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            // Close other dropdowns at the same level
+                            const siblings = [...dropdown.parentElement.children];
+                            siblings.forEach(sibling => {
+                                if (sibling !== dropdown && sibling.classList.contains('navigationDropdownWrapper')) {
+                                    sibling.classList.remove('active');
+                                }
+                            });
+
+                            dropdown.classList.toggle('active');
+                        }
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!navContainer.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        navContainer.classList.remove('active');
+                        mobileMenuToggle.textContent = '☰';
+                        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768) {
+                        navContainer.classList.remove('active');
+                        mobileMenuToggle.textContent = '☰';
+                        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                    }
+                });
+            });
+
+            //nav
+
+
+            function validateForm(event) {
+                event.preventDefault();
+
+                // Reset errors
+                document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+
+                let isValid = true;
+
+                // Name validation
+                const name = document.getElementById('name').value.trim();
+                if (name === '') {
+                    document.getElementById('nameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Email validation
+                const email = document.getElementById('email').value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Message validation
+                const message = document.getElementById('message').value.trim();
+                if (message === '') {
+                    document.getElementById('messageError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    // Form is valid, you can submit it here
+                    alert('Form submitted successfully!');
+                    document.getElementById('contactForm').reset();
+                }
+
+                return isValid;
+            }
+
+        </script>
+</body>
+
+</html>

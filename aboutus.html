@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Meena Circuits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --primary: #9333ea;
+            --secondary: #6b21a8;
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero-about {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2VzyQ3xLmRbbT1I0BUSPZ2M7NRBjbb.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(147, 51, 234, 0.7));
+            animation: gradientShift 10s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(147, 51, 234, 0.7));
+            }
+
+            100% {
+                background: linear-gradient(135deg, rgba(147, 51, 234, 0.7), rgba(0, 0, 0, 0.8));
+            }
+        }
+
+        .hero-about h1 {
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Who We Are Section */
+        .who-we-are {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+
+        .who-we-are img {
+            width: 50%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .who-we-are-content {
+            flex: 1;
+        }
+
+        .who-we-are-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .who-we-are-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2VzyQ3xLmRbbT1I0BUSPZ2M7NRBjbb.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 4rem 0;
+            color: var(--white);
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(147, 51, 234, 0.8));
+        }
+
+        .stats .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Company Culture Section */
+        .company-culture {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .culture-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: transform 0.5s ease;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+        }
+
+        .culture-card:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .culture-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background-color: #f9fafb;
+        }
+
+        .features-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .features-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-about h1 {
+                font-size: 3rem;
+            }
+
+            .who-we-are {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .who-we-are img {
+                width: 100%;
+                order: 2;
+            }
+
+            .who-we-are-content {
+                order: 1;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .culture-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-about h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /*NAV*/
+        .headerContainer {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navigationContainerWrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .primaryLogoIdentifier {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navigationLinksContainer {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navigationLinksContainer a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navigationLinksContainer a:hover {
+            color: var(--accent-color);
+        }
+
+        .navigationDropdownWrapper {
+            position: relative;
+        }
+
+        .dropdownContentContainer {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdownContentContainer a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdownContentContainer a:hover {
+            background-color: var(--background-color);
+        }
+
+        .navigationDropdownWrapper:hover>.dropdownContentContainer {
+            display: block;
+        }
+
+        .nestedDropdownWrapper {
+            position: relative;
+        }
+
+        .nestedDropdownContentContainer {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .nestedDropdownWrapper:hover>.nestedDropdownContentContainer {
+            display: block;
+        }
+
+        .callToActionButton {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .callToActionButton:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .mobileMenuToggleButton {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navigationLinksContainer {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                padding: 20px;
+            }
+
+            .navigationLinksContainer.active {
+                display: flex;
+            }
+
+            .mobileMenuToggleButton {
+                display: block;
+                z-index: 1001;
+            }
+
+            .dropdownContentContainer,
+            .nestedDropdownContentContainer {
+                position: static;
+                box-shadow: none;
+                background-color: transparent;
+                display: none;
+                padding-left: 20px;
+            }
+
+            .navigationDropdownWrapper.active>.dropdownContentContainer,
+            .nestedDropdownWrapper.active>.nestedDropdownContentContainer {
+                display: block;
+            }
+
+            .navigationDropdownWrapper:hover>.dropdownContentContainer,
+            .nestedDropdownWrapper:hover>.nestedDropdownContentContainer {
+                display: none;
+            }
+        }
+        footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 4rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            padding: 0 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Improved Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .navigationLinksContainer {
+                display: none;
+                position: fixed;
+                top: 70px; /* Height of header */
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                overflow-y: auto;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navigationLinksContainer.active {
+                display: flex;
+            }
+
+            .navigationLinksContainer a {
+                padding: 0.8rem 0;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdownContentContainer,
+            .nestedDropdownContentContainer {
+                position: static;
+                box-shadow: none;
+                background-color: #f8f9fa;
+                padding-left: 1rem;
+                width: 100%;
+                margin: 0.5rem 0;
+                border-radius: 4px;
+            }
+
+            .navigationDropdownWrapper.active > .dropdownContentContainer,
+            .nestedDropdownWrapper.active > .nestedDropdownContentContainer {
+                display: block;
+            }
+
+            /* Footer responsive design */
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-logo {
+                justify-content: center;
+            }
+        }
+        /*SOCIALS TOp*/
+        .header-bar {
+            background-color: #D3D3D3;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-info {
+            color: black;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .contact-info {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <div class="contact-info">
+            +91 99250-36831 | +91 96627-00932 | Sales@meenacircuits.co.in
+        </div>
+    </div>
+    <!--ADD LINKS HERE-->
+    <header class="headerContainer">
+        <nav class="navigationContainerWrapper">
+            <div class="primaryLogoIdentifier">Meena Circuits</div>
+            <div class="navigationLinksContainer">
+                <a href="index.html">Home</a>
+                <div class="navigationDropdownWrapper">
+                    <a href="#products">Products</a>
+                    <div class="dropdownContentContainer">
+                        <a href="singleSidedPCB.html">Single Sided PCBs</a>
+                        <a href="#double-sided">Double Sided PCBs</a>
+                        <div class="nestedDropdownWrapper">
+                            <a href="#multilayer">Multilayer PCBs</a>
+                            <div class="nestedDropdownContentContainer">
+                                <a href="#4-layer">4 Layer PCBs</a>
+                                <a href="#6-layer">6 Layer PCBs</a>
+                                <a href="#8-layer">8 Layer PCBs</a>
+                            </div>
+                        </div>
+                        <a href="#metal-core">Metal Core PCBs</a>
+                    </div>
+                </div>
+                <a href="index.html">Industries</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactUs.html">Contact</a>
+            </div>
+            <a href="#quote" class="callToActionButton">Call for Quote</a>
+            <button class="mobileMenuToggleButton">☰</button>
+        </nav>
+    </header>
+    <main>
+        <section class="hero-about">
+            <h1>About Us</h1>
+        </section>
+
+        <section class="who-we-are container">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Nt5GoDq8cguP3dHTvbstJcbIOCN4xg.png"
+                alt="PCB Manufacturing">
+            <div class="who-we-are-content">
+                <h2>Who Are We?</h2>
+                <p>Meena Circuit Pvt Ltd is an ISO-certified manufacturer of PCBs with a long-standing legacy. We have
+                    been supplying high-quality PCBs to our customers since 2006, and we strive to be the best by
+                    continuously innovating our processes and providing excellent customer service.</p>
+                <p>At Meena Circuits Private Limited, we have established one of the largest Printed Circuit Board
+                    manufacturing plants in western India. With cutting-edge technology and modern processes, we are
+                    able to deliver professionally graded PCBs on time globally.</p>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 class="stat-number" data-target="3">0</h3>
+                        <p>Countries</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number" data-target="800">0</h3>
+                        <p>Satisfied Clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number" data-target="700">0+</h3>
+                        <p>Jobs</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number" data-target="99.15">0%</h3>
+                        <p>Delivery Rate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="company-culture container">
+            <h2 class="section-title">Company Culture</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <h3>Our Mission</h3>
+                    <p>Our Mission Is To Be The Best In The Business By Offering Fast, Efficient And Affordable PCBs
+                        That Meet Our Customer's Highest Standards Of Quality And Reliability By Utilising Advanced
+                        Technology.</p>
+                </div>
+                <div class="culture-card">
+                    <h3>Our Values</h3>
+                    <p>Our Values Include Integrity, Quality, Innovation, And Service Excellence. These Core Values Are
+                        The Foundation Of Our Success And Help Us Maintain High Standards At All Times.</p>
+                </div>
+                <div class="culture-card">
+                    <h3>Our Vision</h3>
+                    <p>Our Vision Is To Become The Leading Provider Of High-Quality PCBs In All Over India. Our Goal Is
+                        To Make The Custom Design, Manufacture And Assembly Of PCBs Easier And More Cost-Effective For
+                        Everyone.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Meena Circuits Logo">
+                        <span>Meena Circuits</span>
+                    </div>
+                    <p>Leading PCB manufacturer in India since 2006.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Indian Office</h3>
+                    <p>Survey #99/1, Village Vadadala, Jarod-Savli Road, Tal:Savli,Vadodara</p>
+                    <p>Email: sales@meenacircuits.co.in</p>
+                    <p>Phone: +91 99250-36831</p>
+                </div>
+                <div class="footer-section">
+                    <h3>USA Office</h3>
+                    <p>Atlantic Overseas – INC 100 Duffy Avenue Suite 510 Hicksville New York 11801</p>
+                    <p>Email: info@atlanticoverseas.net</p>
+                    <p>Phone: +15167387288</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday – Saturday: 9:00 A.M to 5:30 P.M</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Meena Circuit </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        //nav
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobileMenuToggleButton');
+            const navContainer = document.querySelector('.navigationLinksContainer');
+            const dropdowns = document.querySelectorAll('.navigationDropdownWrapper, .nestedDropdownWrapper');
+            
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navContainer.classList.toggle('active');
+                mobileMenuToggle.textContent = navContainer.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Handle dropdowns
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Close other dropdowns at the same level
+                        const siblings = [...dropdown.parentElement.children];
+                        siblings.forEach(sibling => {
+                            if (sibling !== dropdown && sibling.classList.contains('navigationDropdownWrapper')) {
+                                sibling.classList.remove('active');
+                            }
+                        });
+                        
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navContainer.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    navContainer.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navContainer.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+        });
+
+
+        // Intersection Observer for counting animation
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe stats section
+        const statsSection = document.querySelector('.stats');
+        statsObserver.observe(statsSection);
+
+        function animateStats() {
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach(item => item.classList.add('active'));
+
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const steps = 100;
+                const increment = target / steps;
+                let currentValue = 0;
+
+                const updateCounter = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= target) {
+                        currentValue = target;
+                        clearInterval(updateCounter);
+                    }
+
+                    // Handle decimal places for delivery rate
+                    if (target === 99.15) {
+                        counter.textContent = currentValue.toFixed(2) + "%";
+                    } else {
+                        counter.textContent = Math.floor(currentValue) + "+";
+                    }
+                }, duration / steps);
+            });
+        }
+    </script>
+</body>
+
+</html>
